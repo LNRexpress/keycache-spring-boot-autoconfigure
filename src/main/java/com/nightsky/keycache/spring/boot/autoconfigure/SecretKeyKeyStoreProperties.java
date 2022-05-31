@@ -1,5 +1,6 @@
 package com.nightsky.keycache.spring.boot.autoconfigure;
 
+import java.util.Map;
 import org.springframework.core.io.Resource;
 
 /**
@@ -11,6 +12,8 @@ public class SecretKeyKeyStoreProperties {
     private Resource resource;
 
     private String password;
+
+    private Map<String, Resource> keyPasswords;
 
     public SecretKeyKeyStoreProperties() {
     }
@@ -41,6 +44,20 @@ public class SecretKeyKeyStoreProperties {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the keyPasswords
+     */
+    public Map<String, Resource> getKeyPasswords() {
+        return keyPasswords;
+    }
+
+    /**
+     * @param keyPasswords the keyPasswords to set
+     */
+    public void setKeyPasswords(Map<String, Resource> keyPasswords) {
+        this.keyPasswords = keyPasswords;
     }
 
 }

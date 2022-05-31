@@ -1,15 +1,15 @@
 package com.nightsky.keycache.spring.boot.autoconfigure;
 
+import com.google.common.base.Preconditions;
 import com.nightsky.keycache.BcfksVersionedKeyPairCache;
 import com.nightsky.keycache.BcfksVersionedSecretKeyCache;
 import com.nightsky.keycache.VersionedKeyPairCache;
 import com.nightsky.keycache.VersionedSecretKeyCache;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 
 /**
  *
@@ -19,6 +19,9 @@ import org.springframework.core.io.Resource;
 @EnableConfigurationProperties(KeyCacheProperties.class)
 public class KeyCacheAutoConfiguration {
 
+    @Autowired
+    private KeyCacheProperties keyCacheProperties;
+
     @Bean
     @ConditionalOnProperty(
         prefix = "keycache",
@@ -26,11 +29,14 @@ public class KeyCacheAutoConfiguration {
             "secret-key-key-store.resource",
             "secret-key-key-store.password"
         })
-    public VersionedSecretKeyCache versionedSecretKeyCache(
-        @Value("${keycache.secret-key-key-store.resource}") Resource keyStoreResource,
-        @Value("${keycache.secret-key-key-store.password}") String keyStorePassword)
+    public VersionedSecretKeyCache versionedSecretKeyCache()
     {
-        return new BcfksVersionedSecretKeyCache(keyStoreResource, keyStorePassword);
+        Preconditions.checkNotNull(keyCacheProperties.getSecretKeyKeyStore().getKeyPasswords(), "Passwords for secret keys not found");
+
+        return new BcfksVersionedSecretKeyCache(
+            keyCacheProperties.getSecretKeyKeyStore().getResource(),
+            keyCacheProperties.getSecretKeyKeyStore().getPassword(),
+            keyCacheProperties.getSecretKeyKeyStore().getKeyPasswords());
     }
 
     @Bean
@@ -40,11 +46,14 @@ public class KeyCacheAutoConfiguration {
             "key-pair-key-store.resource",
             "key-pair-key-store.password"
         })
-    public VersionedKeyPairCache versionedKeyPairCache(
-        @Value("${keycache.key-pair-key-store.resource}") Resource keyStoreResource,
-        @Value("${keycache.key-pair-key-store.password}") String keyStorePassword)
+    public VersionedKeyPairCache versionedKeyPairCache()
     {
-        return new BcfksVersionedKeyPairCache(keyStoreResource, keyStorePassword);
+        Preconditions.checkNotNull(keyCacheProperties.getKeyPairKeyStore().getKeyPasswords(), "Passwords for private keys not found");
+
+        return new BcfksVersionedKeyPairCache(
+            keyCacheProperties.getKeyPairKeyStore().getResource(),
+            keyCacheProperties.getKeyPairKeyStore().getPassword(),
+            keyCacheProperties.getKeyPairKeyStore().getKeyPasswords());
     }
 
 }
