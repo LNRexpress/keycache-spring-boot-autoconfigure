@@ -9,27 +9,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "keycache")
 public class KeyCacheProperties {
 
-    private KeyDictionary keyDictionary;
-
     private SecretKeyKeyStoreProperties secretKeyKeyStore;
 
     private KeyPairKeyStoreProperties keyPairKeyStore;
 
     public KeyCacheProperties() {
-    }
-
-    /**
-     * @return the keyDictionary
-     */
-    public KeyDictionary getKeyDictionary() {
-        return keyDictionary;
-    }
-
-    /**
-     * @param keyDictionary the keyDictionary to set
-     */
-    public void setKeyDictionary(KeyDictionary keyDictionary) {
-        this.keyDictionary = keyDictionary;
     }
 
     /**
