@@ -24,7 +24,7 @@ public class KeyCacheAutoConfiguration {
     @Autowired
     private KeyCacheProperties keyCacheProperties;
 
-    @Bean
+    @Bean("versionedSecretKeyCache")
     @ConditionalOnProperty(
         prefix = "keycache",
         name = {
@@ -53,7 +53,7 @@ public class KeyCacheAutoConfiguration {
         return builder.build();
     }
 
-    @Bean
+    @Bean("versionedSecretKeyCache")
     @ConditionalOnProperty(
         prefix = "keycache",
         name = {
@@ -82,7 +82,7 @@ public class KeyCacheAutoConfiguration {
         return builder.build();
     }
 
-    @Bean
+    @Bean("versionedKeyPairCache")
     @ConditionalOnProperty(
         prefix = "keycache",
         name = {
@@ -111,7 +111,7 @@ public class KeyCacheAutoConfiguration {
         return builder.build();
     }
 
-    @Bean
+    @Bean("versionedKeyPairCache")
     @ConditionalOnProperty(
         prefix = "keycache",
         name = {
