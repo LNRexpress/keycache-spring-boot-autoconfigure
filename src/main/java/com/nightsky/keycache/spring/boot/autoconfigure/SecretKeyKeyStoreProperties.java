@@ -1,5 +1,6 @@
 package com.nightsky.keycache.spring.boot.autoconfigure;
 
+import java.time.Duration;
 import java.util.Map;
 import org.springframework.core.io.Resource;
 
@@ -11,9 +12,17 @@ public class SecretKeyKeyStoreProperties {
 
     private Resource resource;
 
+    private Resource passwordResource;
+
     private String password;
 
     private Map<String, Resource> keyPasswords;
+
+    private Duration expireAfterWrite;
+
+    private String keyStoreType;
+
+    private String keyNamePattern;
 
     public SecretKeyKeyStoreProperties() {
     }
@@ -30,6 +39,20 @@ public class SecretKeyKeyStoreProperties {
      */
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    /**
+     * @return the passwordResource
+     */
+    public Resource getPasswordResource() {
+        return passwordResource;
+    }
+
+    /**
+     * @param passwordResource the passwordResource to set
+     */
+    public void setPasswordResource(Resource passwordResource) {
+        this.passwordResource = passwordResource;
     }
 
     /**
@@ -58,6 +81,48 @@ public class SecretKeyKeyStoreProperties {
      */
     public void setKeyPasswords(Map<String, Resource> keyPasswords) {
         this.keyPasswords = keyPasswords;
+    }
+
+    /**
+     * @return the expireAfterWrite
+     */
+    public Duration getExpireAfterWrite() {
+        return expireAfterWrite;
+    }
+
+    /**
+     * @param expireAfterWrite the expireAfterWrite to set
+     */
+    public void setExpireAfterWrite(Duration expireAfterWrite) {
+        this.expireAfterWrite = expireAfterWrite;
+    }
+
+    /**
+     * @return the keyStoreType
+     */
+    public String getKeyStoreType() {
+        return keyStoreType;
+    }
+
+    /**
+     * @param keyStoreType the keyStoreType to set
+     */
+    public void setKeyStoreType(String keyStoreType) {
+        this.keyStoreType = keyStoreType;
+    }
+
+    /**
+     * @return the keyNamePattern
+     */
+    public String getKeyNamePattern() {
+        return keyNamePattern;
+    }
+
+    /**
+     * @param keyNamePattern the keyNamePattern to set
+     */
+    public void setKeyNamePattern(String keyNamePattern) {
+        this.keyNamePattern = keyNamePattern;
     }
 
 }
