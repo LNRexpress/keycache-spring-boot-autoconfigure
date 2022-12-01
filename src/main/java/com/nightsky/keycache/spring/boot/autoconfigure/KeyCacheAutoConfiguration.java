@@ -116,7 +116,7 @@ public class KeyCacheAutoConfiguration {
         prefix = "keycache",
         name = {
             "key-pair-key-store.resource",
-            "key-pair-key-store.password"
+            "key-pair-key-store.password-resource"
         })
     public VersionedKeyPairCache versionedKeyPairCacheWithPasswordResource()
     {
