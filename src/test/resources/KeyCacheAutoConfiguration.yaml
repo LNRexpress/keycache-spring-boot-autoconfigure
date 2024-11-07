@@ -1,0 +1,14 @@
+keycache:
+    secret-key-key-store:
+        resource: classpath:keystore.bcfks
+        password: password
+        key-store-type: BCFKS
+        key-passwords:
+            test-key-v1: classpath:test-key-v1.password
+    key-pair-key-store:
+        resource: classpath:keystore.bcfks
+        password: password
+        key-store-type: BCFKS
+        key-passwords:
+            test-key-v2: classpath:test-key-v2.password
+            test-key-v3: classpath:test-key-v3.password
