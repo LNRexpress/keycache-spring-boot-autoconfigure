@@ -1,7 +1,9 @@
 package com.nightsky.keycache.spring.boot.autoconfigure;
 
+import java.security.KeyStore;
 import java.time.Duration;
 import java.util.Map;
+import javax.crypto.SecretKey;
 import org.springframework.core.io.Resource;
 
 /**
@@ -10,22 +12,53 @@ import org.springframework.core.io.Resource;
  */
 public class SecretKeyKeyStoreProperties {
 
+    /**
+     * The location of the {@link KeyStore} containing the
+     * {@link SecretKey SecretKeys}.
+     */
     private Resource resource;
 
+    /**
+     * The location of the file containing the password for accessing the
+     * {@link KeyStore}. If not specified,
+     * {@link SecretKeyKeyStoreProperties#password password} must be set.
+     */
     private Resource passwordResource;
 
+    /**
+     * The password used to access the {@link KeyStore}. If not specified,
+     * {@link SecretKeyKeyStoreProperties#passwordResource passwordResource}
+     * must be set.
+     */
     private String password;
 
+    /**
+     * A {@link Map} containing the passwords used for accessing the individual
+     * keys in the {@link KeyStore}. The {@code Map} keys are the aliases of
+     * the {@link SecretKey SecretKeys} in the {@link KeyStore}. The
+     * {@code Map} values are the locations of the files containing the
+     * passwords used for accessing the corresponding
+     * {@link SecretKey SecretKeys}.
+     */
     private Map<String, Resource> keyPasswords;
 
+    /**
+     * The amount of time that the {@link SecretKey SecretKeys} should be
+     * cached before being refreshed.
+     */
     private Duration expireAfterWrite;
 
+    /**
+     * The type of the {@link KeyStore}. Either JCEKS or BCFKS.
+     */
     private String keyStoreType;
 
+    /**
+     * The expected pattern of the key aliases in the {@link KeyStore}. This
+     * pattern is used to extract the name of the key and the version of key
+     * from the key alias.
+     */
     private String keyNamePattern;
-
-    public SecretKeyKeyStoreProperties() {
-    }
 
     /**
      * @return the resource
