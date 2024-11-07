@@ -13,9 +13,6 @@ public class KeyCacheProperties {
 
     private KeyPairKeyStoreProperties keyPairKeyStore;
 
-    public KeyCacheProperties() {
-    }
-
     /**
      * @return the secretKeyKeyStore
      */
